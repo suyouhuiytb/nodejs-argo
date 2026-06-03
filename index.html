@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星海纪元 | 探索未知的未来</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #00f5ff;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', system-ui, sans-serif;
+        }
+        
+        .title-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.85)), 
+                        url('https://picsum.photos/id/1015/1920/1080') center/cover no-repeat;
+        }
+
+        .star-bg {
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,0.8) 1px, transparent 1px),
+                radial-gradient(white, rgba(255,255,255,0.6) 1px, transparent 1px);
+            background-position: 0 0, 25px 25px;
+            background-size: 50px 50px;
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgb(0 245 255 / 0.25);
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px #00f5ff,
+                        0 0 20px #00f5ff;
+        }
+    </style>
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-lg border-b border-cyan-500/20">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-rocket text-3xl text-cyan-400"></i>
+                <span class="title-font text-3xl font-bold tracking-tighter neon-text">星海纪元</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-10">
+                <a href="#explore" class="hover:text-cyan-400 transition-colors">探索发现</a>
+                <a href="#planets" class="hover:text-cyan-400 transition-colors">宇宙天体</a>
+                <a href="#news" class="hover:text-cyan-400 transition-colors">星际新闻</a>
+                <a href="#gallery" class="hover:text-cyan-400 transition-colors">视觉档案</a>
+                <a href="#community" class="hover:text-cyan-400 transition-colors">星际社区</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button onclick="toggleDarkMode()" 
+                        class="w-10 h-10 flex items-center justify-center rounded-full border border-cyan-400/30 hover:bg-cyan-400/10 transition-colors">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button onclick="alert('已加入星际舰队！🚀')"
+                        class="bg-cyan-500 hover:bg-cyan-400 text-black font-medium px-6 py-3 rounded-2xl transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-satellite"></i>
+                    <span>加入探索</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区 -->
+    <section class="hero-bg h-screen flex items-center relative">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full mb-6 border border-white/20">
+                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span class="text-sm tracking-widest">实时在线 · 2026.06</span>
+            </div>
+            
+            <h1 class="title-font text-7xl md:text-8xl font-bold leading-none mb-6 neon-text">
+                探索<br>无垠星海
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-10">
+                人类文明已迈入星际时代。<br>
+                一起见证奇迹，追寻宇宙的真相。
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-5 justify-center">
+                <button onclick="document.getElementById('explore').scrollIntoView({behavior: 'smooth'})"
+                        class="group bg-white text-black px-10 py-5 rounded-3xl font-medium flex items-center justify-center gap-3 hover:scale-105 transition-all">
+                    <span class="text-lg">立即启航</span>
+                    <i class="fa-solid fa-arrow-right group-active:rotate-45 transition-transform"></i>
+                </button>
+                
+                <button onclick="watchTrailer()"
+                        class="border border-white/60 hover:border-white px-10 py-5 rounded-3xl flex items-center gap-3 transition-all">
+                    <i class="fa-solid fa-play"></i>
+                    <span>观看宣传片</span>
+                </button>
+            </div>
+            
+            <div class="absolute bottom-12 left-1/2 flex flex-col items-center gap-2">
+                <span class="text-xs tracking-widest opacity-60">向下滚动探索</span>
+                <i class="fa-solid fa-chevron-down animate-bounce"></i>
+            </div>
+        </div>
+
+        <!-- 浮动装饰 -->
+        <div class="absolute top-32 right-12 hidden lg:block">
+            <div class="bg-white/5 backdrop-blur-xl border border-cyan-400/30 rounded-3xl p-6 w-64">
+                <div class="flex justify-between text-sm mb-4">
+                    <span>火星基地</span>
+                    <span class="text-emerald-400">正常运行</span>
+                </div>
+                <div class="h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 探索发现 -->
+    <section id="explore" class="py-24 star-bg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="px-4 py-2 bg-cyan-400/10 text-cyan-400 text-sm rounded-full">DISCOVERY</span>
+                <h2 class="title-font text-5xl font-bold mt-4">今日探索热点</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 卡片1 -->
+                <div class="bg-zinc-900/70 border border-zinc-700 rounded-3xl overflow-hidden card-hover">
+                    <img src="https://picsum.photos/id/1016/800/600" alt="黑洞" 
+                         class="w-full h-56 object-cover">
+                    <div class="p-8">
+                        <div class="flex items-center gap-3 text-xs text-cyan-400 mb-3">
+                            <i class="fa-solid fa-circle"></i>
+                            <span>天体物理</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-3">M87* 黑洞新影像发布</h3>
+                        <p class="text-gray-400 line-clamp-3">
+                            事件视界望远镜团队公布了迄今为止最清晰的M87*黑洞照片，揭示了更多关于吸积盘的细节。
+                        </p>
+                        <div class="mt-6 flex items-center justify-between text-sm">
+                            <span class="text-gray-500">3小时前</span>
+                            <span class="text-cyan-400 hover:underline cursor-pointer">阅读全文 →</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片2 -->
+                <div class="bg-zinc-900/70 border border-zinc-700 rounded-3xl overflow-hidden card-hover">
+                    <img src="https://picsum.photos/id/201/800/600" alt="木卫二" 
+                         class="w-full h-56 object-cover">
+                    <div class="p-8">
+                        <div class="flex items-center gap-3 text-xs text-purple-400 mb-3">
+                            <i class="fa-solid fa-snowflake"></i>
+                            <span>宜居行星</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-3">木卫二欧罗巴地下海洋发现新信号</h3>
+                        <p class="text-gray-400 line-clamp-3">
+                            NASA 的朱诺号探测器捕获到欧罗巴冰壳下可能存在大型水柱活动的证据。
+                        </p>
+                        <div class="mt-6 flex items-center justify-between text-sm">
+                            <span class="text-gray-500">昨天</span>
+                            <span class="text-cyan-400 hover:underline cursor-pointer">阅读全文 →</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片3 -->
+                <div class="bg-zinc-900/70 border border-zinc-700 rounded-3xl overflow-hidden card-hover">
+                    <img src="https://picsum.photos/id/870/800/600" alt="太空电梯" 
+                         class="w-full h-56 object-cover">
+                    <div class="p-8">
+                        <div class="flex items-center gap-3 text-xs text-amber-400 mb-3">
+                            <i class="fa-solid fa-rocket"></i>
+                            <span>工程突破</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-3">中国“天梯计划”第一阶段成功测试</h3>
+                        <p class="text-gray-400 line-clamp-3">
+                            太空电梯碳纳米管缆绳材料在近地轨道成功承受10万吨张力测试。
+                        </p>
+                        <div class="mt-6 flex items-center justify-between text-sm">
+                            <span class="text-gray-500">2天前</span>
+                            <span class="text-cyan-400 hover:underline cursor-pointer">阅读全文 →</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 宇宙天体 -->
+    <section id="planets" class="py-24 bg-zinc-950">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="title-font text-5xl font-bold text-center mb-16">太阳系主要天体</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="group relative bg-gradient-to-br from-orange-900/30 to-transparent border border-orange-500/30 rounded-3xl p-8 hover:border-orange-400 transition-all">
+                    <div class="text-6xl mb-6">☀️</div>
+                    <h4 class="text-2xl font-bold">太阳</h4>
+                    <p class="text-sm text-gray-400 mt-2">恒星 · 直径139万公里</p>
+                    <span class="absolute top-8 right-8 text-5xl opacity-20 group-hover:opacity-40 transition-all">☀️</span>
+                </div>
+                
+                <div class="group relative bg-gradient-to-br from-blue-900/30 to-transparent border border-blue-500/30 rounded-3xl p-8 hover:border-blue-400 transition-all">
+                    <div class="text-6xl mb-6">🪐</div>
+                    <h4 class="text-2xl font-bold">木星</h4>
+                    <p class="text-sm text-gray-400 mt-2">最大行星 · 79颗卫星</p>
+                </div>
+                
+                <div class="group relative bg-gradient-to-br from-cyan-900/30 to-transparent border border-cyan-500/30 rounded-3xl p-8 hover:border-cyan-400 transition-all">
+                    <div class="text-6xl mb-6">🌍</div>
+                    <h4 class="text-2xl font-bold">地球</h4>
+                    <p class="text-sm text-gray-400 mt-2">唯一已知宜居星球</p>
+                </div>
+                
+                <div class="group relative bg-gradient-to-br from-red-900/30 to-transparent border border-red-500/30 rounded-3xl p-8 hover:border-red-400 transition-all">
+                    <div class="text-6xl mb-6">♂️</div>
+                    <h4 class="text-2xl font-bold">火星</h4>
+                    <p class="text-sm text-gray-400 mt-2">人类下一个家园</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 星际新闻 -->
+    <section id="news" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-12">
+                <h2 class="title-font text-5xl font-bold">星际快报</h2>
+                <a href="#" class="text-cyan-400 flex items-center gap-2 hover:gap-3 transition-all">
+                    查看全部 <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="space-y-8">
+                <div class="flex gap-8 bg-zinc-900/50 rounded-3xl p-8">
+                    <div class="w-48 h-32 bg-cover rounded-2xl flex-shrink-0" 
+                         style="background-image: url('https://picsum.photos/id/1018/400/300')"></div>
+                    <div>
+                        <div class="uppercase text-xs tracking-widest text-rose-400">突破性发现</div>
+                        <h3 class="text-3xl font-medium mt-2 mb-4">詹姆斯·韦伯太空望远镜发现最遥远星系</h3>
+                        <p class="text-gray-400">距离地球约135亿光年，可能形成于宇宙大爆炸后仅3.5亿年。</p>
+                        <div class="text-xs text-gray-500 mt-6">2026年5月28日 · 来源：NASA</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视觉档案 -->
+    <section id="gallery" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="title-font text-5xl font-bold text-center mb-4">宇宙视觉档案</h2>
+            <p class="text-center text-gray-400 mb-16">来自人类最先进设备的真实影像</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <img src="https://picsum.photos/id/1015/600/600" alt="" 
+                     class="rounded-3xl aspect-square object-cover hover:scale-105 transition-transform cursor-pointer">
+                <img src="https://picsum.photos/id/133/600/600" alt="" 
+                     class="rounded-3xl aspect-square object-cover hover:scale-105 transition-transform cursor-pointer">
+                <img src="https://picsum.photos/id/201/600/600" alt="" 
+                     class="rounded-3xl aspect-square object-cover hover:scale-105 transition-transform cursor-pointer">
+                <img src="https://picsum.photos/id/870/600/600" alt="" 
+                     class="rounded-3xl aspect-square object-cover hover:scale-105 transition-transform cursor-pointer">
+            </div>
+        </div>
+    </section>
+
+    <!-- 互动模块 -->
+    <section class="py-24 bg-gradient-to-b from-zinc-950 to-black">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="title-font text-5xl font-bold mb-8">你想去哪里？</h2>
+            <div class="bg-zinc-900 rounded-3xl p-12">
+                <div class="grid grid-cols-3 gap-6 text-center">
+                    <div onclick="chooseDestination(this)" class="cursor-pointer p-6 hover:bg-zinc-800 rounded-2xl transition-all">
+                        <div class="text-5xl mb-4">🌕</div>
+                        <p class="font-medium">月球基地</p>
+                    </div>
+                    <div onclick="chooseDestination(this)" class="cursor-pointer p-6 hover:bg-zinc-800 rounded-2xl transition-all">
+                        <div class="text-5xl mb-4">🔴</div>
+                        <p class="font-medium">火星殖民</p>
+                    </div>
+                    <div onclick="chooseDestination(this)" class="cursor-pointer p-6 hover:bg-zinc-800 rounded-2xl transition-all bg-cyan-900/30 border border-cyan-400">
+                        <div class="text-5xl mb-4">🪐</div>
+                        <p class="font-medium">土星环</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-black border-t border-white/10 py-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="fa-solid fa-rocket text-3xl text-cyan-400"></i>
+                    <span class="title-font text-3xl font-bold">星海纪元</span>
+                </div>
+                <p class="text-gray-400 text-sm">人类对宇宙的想象从未停止。</p>
+            </div>
+            
+            <div>
+                <h5 class="font-medium mb-5">快速导航</h5>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-white">探索发现</a></li>
+                    <li><a href="#" class="hover:text-white">天体图鉴</a></li>
+                    <li><a href="#" class="hover:text-white">直播舱</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="font-medium mb-5">关于我们</h5>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-white">项目背景</a></li>
+                    <li><a href="#" class="hover:text-white">合作机构</a></li>
+                    <li><a href="#" class="hover:text-white">联系我们</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="font-medium mb-5">关注我们</h5>
+                <div class="flex gap-6 text-2xl">
+                    <i class="fa-brands fa-weixin hover:text-cyan-400 cursor-pointer"></i>
+                    <i class="fa-brands fa-x-twitter hover:text-cyan-400 cursor-pointer"></i>
+                    <i class="fa-brands fa-bilibili hover:text-cyan-400 cursor-pointer"></i>
+                </div>
+                <div class="mt-10 text-xs text-gray-500">
+                    © 2026 星海纪元实验室<br>
+                    纯虚构演示页面
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script
+        function initTailwind() {
+            // Already loaded via CDN
+        }
+        
+        // 简单暗黑模式切换（演示用）
+        function toggleDarkMode() {
+            alert("🌌 欢迎来到真正的星际黑暗模式！\n\n本页面已为深空优化。");
+        }
+        
+        function watchTrailer() {
+            const messages = [
+                "🚀 加载中...",
+                "画面来自 2048 年的想象...",
+                "3... 2... 1... 发射！"
+            ];
+            let i = 0;
+            const interval = setInterval(() => {
+                alert(messages[i]);
+                i++;
+                if (i >= messages.length) clearInterval(interval);
+            }, 800);
+        }
+        
+        function chooseDestination(el) {
+            document.querySelectorAll('#planets .cursor-pointer').forEach(item => {
+                item.classList.remove('bg-cyan-900/30', 'border', 'border-cyan-400');
+            });
+            el.classList.add('bg-cyan-900/30', 'border', 'border-cyan-400');
+            
+            setTimeout(() => {
+                alert("🌌 目的地已锁定！\n\n你的星际旅行申请已提交。\n预计出发时间：2035年");
+            }, 300);
+        }
+        
+        // 键盘彩蛋
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/' && document.activeElement.tagName !== "INPUT") {
+                e.preventDefault();
+                alert("🔍 搜索功能开发中...\n\n试试在控制台输入 'launch()' 吧！");
+            }
+        });
+        
+        // 页面加载完成提示
+        window.onload = function() {
+            console.log("%c🌌 欢迎来到《星海纪元》演示页面！", "color:#00f5ff; font-size:18px; font-family:monospace");
+            
+            // 随机浮动文字
+            setTimeout(() => {
+                const tip = document.createElement('div');
+                tip.style.position = 'fixed';
+                tip.style.bottom = '30px';
+                tip.style.left = '50%';
+                tip.style.transform = 'translateX(-50%)';
+                tip.style.background = 'rgba(0,245,255,0.1)';
+                tip.style.border = '1px solid rgba(0,245,255,0.3)';
+                tip.style.padding = '12px 24px';
+                tip.style.borderRadius = '9999px';
+                tip.style.fontSize = '14px';
+                tip.style.opacity = '0';
+                tip.style.transition = 'all 1s';
+                tip.innerHTML = '💡 提示：尝试点击卡片和行星';
+                document.body.appendChild(tip);
+                
+                setTimeout(() => tip.style.opacity = '1', 1000);
+                setTimeout(() => {
+                    tip.style.opacity = '0';
+                    setTimeout(() => tip.remove(), 1000);
+                }, 6000);
+            }, 2500);
+        };
+    </script>
+</body>
+</html>
